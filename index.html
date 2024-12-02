@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Tuisurööpad</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Times New Roman, serif;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: white;
+            color: darkblue;
+        }
+
+        table {
+            text-align: center;
+            width: 35%;
+            max-width: 600px;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        th {
+            font-weight: bold;
+            font-size: 24px;
+            color: black;
+            margin-bottom: 20px;
+            padding-top: 20px;
+        }
+
+        td {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 2px solid lightblue;
+            background-color: palevioletred;
+        }
+
+        h1 {
+            font-size: 64px;
+            font-weight: bold;
+            color: lightblue;
+            text-align: center;
+            font-family: 'Lobster', serif;
+        }
+
+        h3 {
+            text-align: left;
+            font-size: 21px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        /* Reageeriv disain väiksemale ekraanile */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 36px;
+            }
+
+            th, td {
+                font-size: 14px;
+                padding: 6px;
+            }
+
+            h3 {
+                font-size: 16px;
+            }
+
+            table {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            th, td {
+                font-size: 12px;
+                padding: 4px;
+            }
+
+            h3 {
+                font-size: 14px;
+            }
+        }
+    </style>
+    <script>
+        // Initial times for Tondi and Kivimäe
+        let times = [
+            "10:15", "10:25", "10:35", // Tondi
+            "11:00", "11:10", "11:20"  // Kivimäe
+        ];
+
+        // Function to increment a time string by 10 minutes
+        function incrementTime(time) {
+            let [hours, minutes] = time.split(":").map(Number);
+            minutes += 10;
+
+            if (minutes >= 60) {
+                minutes -= 60;
+                hours += 1;
+            }
+
+            if (hours >= 24) {
+                hours -= 24;
+            }
+
+            return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
+        }
+
+        // Function to update all times in the table
+        function updateTimes() {
+            // Increment each time in the array
+            times = times.map(incrementTime);
+
+            // Update the table cells
+            const cells = document.querySelectorAll("td.time");
+            cells.forEach((cell, index) => {
+                cell.textContent = times[index];
+            });
+        }
+
+        // Update every 10 seconds
+        setInterval(updateTimes, 10000);
+
+        // Initialize on page load
+        document.addEventListener("DOMContentLoaded", updateTimes);
+    </script>
+</head>
+<body>
+<h1>Tuisurööpad</h1>
+<table>
+    <tr>
+        <th colspan="2" scope="col"><u>Tondi</u></th>
+    </tr>
+    <tr>
+        <td><h3>Väljuv rong:</h3></td>
+        <td class="time">10:15</td>
+    </tr>
+    <tr>
+        <td><h3>Järgmine rong:</h3></td>
+        <td class="time">10:25</td>
+    </tr>
+    <tr>
+        <td><h3>Kolmas rong:</h3></td>
+        <td class="time">10:35</td>
+    </tr>
+    <tr>
+        <th colspan="2" scope="col"><u>Kivimäe</u></th>
+    </tr>
+    <tr>
+        <td><h3>Väljuv rong:</h3></td>
+        <td class="time">11:00</td>
+    </tr>
+    <tr>
+        <td><h3>Järgmine rong:</h3></td>
+        <td class="time">11:10</td>
+    </tr>
+    <tr>
+        <td><h3>Kolmas rong:</h3></td>
+        <td class="time">11:20</td>
+    </tr>
+</table>
+</body>
+</html>
+
